@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/06 18:08:33 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/06 19:34:41 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,14 @@ int read_file(char *str, t_param p)
 	int		fd;
 	int		nb;
 	char	*line;
+	char	*image_string;
 	
 	y = 0;	
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	p.image = mlx_new_image(p.mlx, 19 * x, 11 * y); // image 
+//	p.image = mlx_new_image(p.mlx, 55 * x, 11 * y); // image 
+//	image_string = mlx_get_data_addr(p.image, );
 	while (get_next_line(fd, &line)) 
 	{
 		x = 0;
@@ -83,7 +85,7 @@ int read_file(char *str, t_param p)
 				if (nb == 0)
 					draw(&p, x, y, 0x269D8F);	
 				else
-					draw(&p, x, y, 0xFF0000);
+					draw(&p, x + 1, y, 0xFF0000);
 				while (line[x] >= '0' && line[x] <= '9')
 					x++;
 			}

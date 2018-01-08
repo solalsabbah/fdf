@@ -1,33 +1,38 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/11 17:25:57 by ssabbah           #+#    #+#              #
-#    Updated: 2018/01/08 15:45:32 by ssabbah          ###   ########.fr        #
+#    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
+#    Updated: 2018/01/08 16:40:14 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = fdf
 
-SRC = *.c 
+SRC = 	fdf.c\
+		get_next_line.c\
+		ft_key.c\
+		draw.c\
 
-OBJECTS = *.o
-
-FLAGS = -Wall -Wextra -Werror
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
-	gcc $(FLAGS) -c $(SRC) -include libft.h
-	ar rc $(NAME) $(OBJECTS)	
+$(NAME): $(OBJ)
+	make -C libft
+	mv libft/libft.a .
+	gcc -Wall -g -Werror -Wextra -I fdf.h -c $(SRC) 
+	gcc -Wall -g -Werror -Wextra -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
 
 clean:
-	/bin/rm -f $(OBJECTS)
+	make -C libft clean
+	rm -rf $(OBJ) libft.a libmlx.a
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	make -C libft fclean
+	rm -rf $(NAME)
 
-re: fclean all
+re : fclean all

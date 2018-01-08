@@ -6,136 +6,91 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/06 19:34:41 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/08 16:39:58 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 #include "./minilibx_macos/mlx.h"
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include "get_next_line.h"
 #include "./libft/libft.h"
 
-typedef struct	s_param
-{
-	void	*mlx;
-	void	*win;	
-	void	*image;
-	int		key;
-	int		mouse;
-	char	*file;
-
-}				t_param;
-
 int	ft_mouse_hook(int button, int x, int y, t_param *p)
 {
+	button = 0;
+	p->key = p->key;
 	printf("mouse event (%d:%d)\n",x, y);
 	return (0);
 }
 
-int	draw(t_param *p, int x, int y, int col)
+char	**file2tab(char *str)
 {
-	int a; 
-	int b;
+	int		fd;
+	char	*line;
+	char	*file;
 
-	x = x * p->key;
-	y = y * p->key;
-	b = 0;
-
-	a = 0;
-	while (a % p->key != 0 || a == 0)
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	file = ft_strnew(2);
+	while (get_next_line(fd, &line)) 
 	{
-		mlx_pixel_put(p->mlx, p->win, x + a, y, col);
-		a++;	
+		file = ft_strjoin(file, line);
+		file = ft_strjoin(file, "\n");
 	}
-	while (b % p->key != 0 || b == 0)
-	{
-		mlx_pixel_put(p->mlx, p->win, x, y + b, col);
-		b++;	
-	}
-	return (0);
+	return (ft_split(file));
 }
 
 int read_file(char *str, t_param p)
 {
 	int		x;
-	int		y;
-	int		fd;
-	int		nb;
-	char	*line;
-	char	*image_string;
+	int		a;
+	int		b;
+	//int	hval;
+	char	**tab;
+	//	char	*image_string;
 
-	y = 0;	
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
+	if (!(tab = file2tab(str)))
 		return (-1);
 	//	p.image = mlx_new_image(p.mlx, 55 * x, 11 * y); // image 
 	//	image_string = mlx_get_data_addr(p.image, );
-	while (get_next_line(fd, &line)) 
+	x = 0;
+	a = 0;
+	while (tab[x])
 	{
-		x = 0;
-		while (line[x])
-		{
-			if (line[x] == ' ')
-				x++;
-			else
-			{
-				nb = ft_atoi(&line[x]);
-				if (nb == 0)
-					draw(&p, x, y, 0x269D8F);	
-				else
-					draw(&p, x + 1, y, 0xFF0000);
-				while (line[x] >= '0' && line[x] <= '9')
-					x++;
-			}
-		}
-		y++;
+		if (ft_atoi(tab[x]) == 0 || ft_atoi(tab[x]) != ft_atoi(tab[x + 1]))
+			hdraw(&p, a % 19, b, 0x269D8F);	
+		else if (ft_atoi(tab[x]) == ft_atoi(tab[x + 1])) 
+			hdraw(&p, a % 19, b, 0xFF0000);
+		if (ft_atoi(tab[x]) == 0 || ft_atoi(tab[x]) != ft_atoi(tab[x + 19]))
+			vdraw(&p, a % 19, b, 0x269D8F);
+		else if (ft_atoi(tab[x]) == ft_atoi(tab[x + 19])) 
+			vdraw(&p, a % 19, b, 0xFF0000);
+		a++;
+		x++;
+		b = a / 19;
 	}
 	return (0);
-}
-
-int	ft_key(int keycode, t_param *p)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	printf("key event %d\n", keycode);
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 126) // up
-	{
-		p->key += 1;
-		mlx_clear_window(p->mlx, p->win);
-		read_file(p->file, *p);
-	}
-	if (keycode == 125) // down
-	{
-		p->key -= 1;
-		mlx_clear_window(p->mlx, p->win);
-		read_file(p->file, *p);
-	}
-	if (keycode == 51) // escape
-		mlx_clear_window(p->mlx, p->win);
-	if (keycode == 36)
-		read_file(p->file, *p);
-	return (keycode);
 }
 
 int	main(int ac, char **av)
 {
 	t_param	p;
 
+	ac = 0;
 	p.key = 10;
 	p.mouse = 1;
 	p.mlx = mlx_init();
-	p.win = mlx_new_window(p.mlx, 55 * 25, 11 * 25, "fdf");
+	p.win = mlx_new_window(p.mlx, 1000, 1000, "fdf");
 	p.file = av[1];
 	if (read_file(av[1], p) == -1)
+	{
+		printf("A file is required\n");
 		return (0);
+	}
 	mlx_key_hook(p.win, ft_key, &p);
 	mlx_mouse_hook(p.win, ft_mouse_hook, &p);
 	mlx_loop(p.mlx);

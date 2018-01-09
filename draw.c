@@ -6,37 +6,52 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 16:38:57 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/08 16:39:48 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/09 18:51:16 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	hdraw(t_param *p, int x, int y, int col)
+int	hdraw(t_param *p, int x, int y, int h, int nval, int col)
 {
 	int a;
+	int b;
+	int isoX;
+	int isoY;
 
-	x = x * p->key + 200;
-	y = y * p->key + 300;
-	a = 0;
-	while (a % p->key != 0 || a == 0)
+	x = x * p->key + 600;
+	y = y * p->key + 200;
+	a = x - 1 * h;
+	b = y - h / 2;
+	printf("{%d}\n", a);
+	printf("[%d]\n", x + p->key);
+	while (a < x + p->key)
 	{
-		mlx_pixel_put(p->mlx, p->win, x + a, y, col);
+	//	printf("%d\n", a);
+		isoX = a - b;
+		isoY = (a + b) / 2;
+		mlx_pixel_put(p->mlx, p->win, isoX, isoY, col);
 		a++;
 	}
 	return (0);
 }
 
-int	vdraw(t_param *p, int x, int y, int col)
+int	vdraw(t_param *p, int x, int y, int h, int nval, int col)
 {
+	int a;
 	int b;
+	int isoX;
+	int isoY;
 
-	x = x * p->key + 200;
-	y = y * p->key + 300;
-	b = 0;
-	while (b % p->key != 0 || b == 0)
+	x = x * p->key + 600;
+	y = y * p->key + 200;
+	a = x - 1 * h;
+	b = y - h / 2;
+	while (b < y + p->key)
 	{
-		mlx_pixel_put(p->mlx, p->win, x, y + b, col);
+		isoX = a - b;
+		isoY = (a + b) / 2;
+		mlx_pixel_put(p->mlx, p->win, isoX, isoY, col);
 		b++;
 	}
 	return (0);

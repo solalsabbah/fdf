@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/08 16:39:58 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/09 18:38:12 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ char	**file2tab(char *str)
 int read_file(char *str, t_param p)
 {
 	int		x;
+	//int		y;
 	int		a;
 	int		b;
+	int		h;
 	//int	hval;
+	int		nval;
 	char	**tab;
 	//	char	*image_string;
 
@@ -59,16 +62,38 @@ int read_file(char *str, t_param p)
 	//	image_string = mlx_get_data_addr(p.image, );
 	x = 0;
 	a = 0;
+	int i;
+	int j;
+	int e;
+	int f;
+	i = 0;
+	j = 0;
+	/*	while (tab[i])
+		{
+		j = 0;
+		while (j <= 4)
+		{
+		e = j * 50;
+		f = (i % 6) * 50;
+		draw(&p, e, f, 0x269DFF);
+		j++;
+		}
+		i++;
+		}
+		*/
 	while (tab[x])
 	{
-		if (ft_atoi(tab[x]) == 0 || ft_atoi(tab[x]) != ft_atoi(tab[x + 1]))
-			hdraw(&p, a % 19, b, 0x269D8F);	
-		else if (ft_atoi(tab[x]) == ft_atoi(tab[x + 1])) 
-			hdraw(&p, a % 19, b, 0xFF0000);
-		if (ft_atoi(tab[x]) == 0 || ft_atoi(tab[x]) != ft_atoi(tab[x + 19]))
-			vdraw(&p, a % 19, b, 0x269D8F);
-		else if (ft_atoi(tab[x]) == ft_atoi(tab[x + 19])) 
-			vdraw(&p, a % 19, b, 0xFF0000);
+		h = ft_atoi(tab[x]);
+		if (tab[x + 1]) 
+			nval = ft_atoi(tab[x + 1]);
+		if (h == 0 || h != (nval))
+			hdraw(&p, a % 19, b, h, nval, 0x269D8F);	
+		else if (h == ft_atoi(tab[x + 1])) 
+			hdraw(&p, a % 19, b, h, nval, 0xFF0000);
+		if (h == 0 || h != ft_atoi(tab[x + 19]))
+			vdraw(&p, a % 19, b, h, nval, 0x269D8F);
+		else if (h == ft_atoi(tab[x + 19])) 
+			vdraw(&p, a % 19, b, h, nval, 0xFF0000);
 		a++;
 		x++;
 		b = a / 19;

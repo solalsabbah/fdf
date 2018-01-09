@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   42flat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/06 19:34:41 by ssabbah          ###   ########.fr       */
+/*   Created: 2018/01/09 14:38:02 by ssabbah           #+#    #+#             */
+/*   Updated: 2018/01/09 14:47:21 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,17 @@ int	draw(t_param *p, int x, int y, int col)
 {
 	int a; 
 	int b;
+	int x1;
 
-	x = x * p->key;
-	y = y * p->key;
-	b = 0;
-
-	while (b % p->key != 0 || b == 0)
+	x1 = 1;
+	x = x1;
+	y= 1;
+	a = 50;
+	b = 50;
+	while (x <= a)
 	{
-		a = 0;
-		while (a % p->key != 0 || a == 0)
-		{
-			mlx_pixel_put(p->mlx, p->win, x + a, y + b, col);
-			a++;	
-		}
-		b++;
+		mlx_pixel_put(p->mlx, p->win, x,y+((b-y)*(x - x1))/(a-x1), col);
+		x++;	
 	}
 	return (0);
 }
@@ -65,13 +62,13 @@ int read_file(char *str, t_param p)
 	int		nb;
 	char	*line;
 	char	*image_string;
-	
+
 	y = 0;	
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-//	p.image = mlx_new_image(p.mlx, 55 * x, 11 * y); // image 
-//	image_string = mlx_get_data_addr(p.image, );
+	//	p.image = mlx_new_image(p.mlx, 55 * x, 11 * y); // image 
+	//	image_string = mlx_get_data_addr(p.image, );
 	while (get_next_line(fd, &line)) 
 	{
 		x = 0;
@@ -127,7 +124,7 @@ int	ft_key(int keycode, t_param *p)
 int	main(int ac, char **av)
 {
 	t_param	p;
-	
+
 	p.key = 10;
 	p.mouse = 1;
 	p.mlx = mlx_init();

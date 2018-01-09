@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/08 16:40:41 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/09 18:35:12 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_param
 
 int		read_file(char *str, t_param p);
 int		ft_key(int keycode, t_param *p);
-int		vdraw(t_param *p, int x, int y, int col);
-int		hdraw(t_param *p, int x, int y, int col);
+int		vdraw(t_param *p, int x, int y, int h, int nval, int col);
+int		hdraw(t_param *p, int x, int y, int h, int nval, int col);
 
 #endif

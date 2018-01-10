@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 11:47:38 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 16:43:48 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:26:23 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,32 @@ int	ft_key(int keycode, t_param *p)
 		mlx_clear_window(p->mlx, p->win);
 		read_file(p->file, *p);
 	}
+	if (keycode == 0 && p->key > 5) // a
+	{
+		p->justify -= 1;
+		mlx_clear_window(p->mlx, p->win);
+		read_file(p->file, *p);
+	}
+	if (keycode == 2 && p->key > 5) // d
+	{
+		p->justify += 1;
+		mlx_clear_window(p->mlx, p->win);
+		read_file(p->file, *p);
+	}
+	if (keycode == 1) // w
+	{
+		p->width += 1;
+		mlx_clear_window(p->mlx, p->win);
+		read_file(p->file, *p);
+	}
+	if (keycode == 13) // s
+	{
+		p->width -= 1;
+		mlx_clear_window(p->mlx, p->win);
+		read_file(p->file, *p);
+	}
+
+	
 	if (keycode == 51) // escape
 		mlx_clear_window(p->mlx, p->win);
 	if (keycode == 36)

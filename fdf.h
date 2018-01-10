@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 15:27:35 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:22:58 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ typedef struct	s_param
 	char	*file;
 	int		row;
 	int		col;
-
+	int		width;
+	int		height;
+	int		justify;
 }				t_param;
 
 int		read_file(char *str, t_param p);

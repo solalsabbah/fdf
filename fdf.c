@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 17:24:04 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:22:43 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ int	main(int ac, char **av)
 
 	ac = 0;
 	p.key = 10;
+	p.height = 400;
+	p.width = 200;
 	p.mouse = 1;
+	p.justify = 0;
 	p.mlx = mlx_init();
 	p.win = mlx_new_window(p.mlx, 1000, 1000, "fdf");
 	p.file = av[1];

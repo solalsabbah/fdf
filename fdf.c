@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 18:45:12 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 19:30:30 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char	**file2tab(char *str, t_param *p)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	file = ft_strnew(2);
+	file = ft_strnew(1);
+	line = ft_strnew(2);
 	while (get_next_line(fd, &line)) 
 	{
 		file = ft_strjoin(file, line);
@@ -75,7 +76,6 @@ int read_file(char *str, t_param p)
 	int		a;
 	int		b;
 	int		h;
-	//int	hval;
 	int		nval;
 	int		yval;
 	char	**tab;
@@ -87,11 +87,12 @@ int read_file(char *str, t_param p)
 	//	image_string = mlx_get_data_addr(p.image, );
 	x = 0;
 	a = 0;
+	b = 0;
 	while (tab[x])
 	{
 		h = ft_atoi(tab[x]);
-		if ((x + 1) % p.row != 0 || x == 0)
-		{	
+		if ((x + 1) % p.row != 0 || (x == 0 && tab[x + 1]))
+		{
 			if (tab[x + 1])
 				nval = ft_atoi(tab[x + 1]); 
 			if (h == 0 || h != (nval))
@@ -111,7 +112,6 @@ int read_file(char *str, t_param p)
 		x++;
 		b = a / p.row;
 	}
-	printf("[%d]", x);
 	return (0);
 }
 int	init_p(t_param *p)
@@ -129,10 +129,10 @@ int	main(int ac, char **av)
 	t_param	p;
 	
 	init_p(&p);
-	ac = 0;
-		p.mlx = mlx_init();
-	p.win = mlx_new_window(p.mlx, 1000, 1000, "fdf");
 	p.file = av[1];
+	ac = 0;
+	p.mlx = mlx_init();
+	p.win = mlx_new_window(p.mlx, 1000, 1000, "fdf");
 	if (read_file(av[1], p) == -1)
 	{
 		printf("A file is required\n");

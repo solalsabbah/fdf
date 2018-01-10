@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 11:47:38 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 18:35:49 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 19:19:49 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 int	ft_key(int keycode, t_param *p)
 {
-	int x;
-	int y;
 
-	x = 0;
-	y = 0;
 	printf("key event %d\n", keycode);
 	printf("p key %d\n", p->key);
 	if (keycode == 53)
@@ -37,30 +33,28 @@ int	ft_key(int keycode, t_param *p)
 	}
 	if (keycode == 0 && p->key > 5) // a
 	{
-		p->justify -= 1;
+		p->justify -= 2;
 		mlx_clear_window(p->mlx, p->win);
 		read_file(p->file, *p);
 	}
 	if (keycode == 2 && p->key > 5) // d
 	{
-		p->justify += 1;
+		p->justify += 2;
 		mlx_clear_window(p->mlx, p->win);
 		read_file(p->file, *p);
 	}
 	if (keycode == 1) // w
 	{
-		p->width += 1;
+		p->width += 3;
 		mlx_clear_window(p->mlx, p->win);
 		read_file(p->file, *p);
 	}
 	if (keycode == 13) // s
 	{
-		p->width -= 1;
+		p->width -= 3;
 		mlx_clear_window(p->mlx, p->win);
 		read_file(p->file, *p);
 	}
-
-	
 	if (keycode == 51) // escape
 		mlx_clear_window(p->mlx, p->win);
 	if (keycode == 36)

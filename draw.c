@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 16:38:57 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 18:39:16 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 19:10:52 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	hdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 	int isoX1;
 	int isoY1;
 	int tmp;
+	int r;
+	int s;
+
+	r = 1;
 
 	x1 = (x0 + 1) * p->key;
 
@@ -34,9 +38,9 @@ int	hdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 	x1 = x1 - 1 * nval;
 	y1 = y1 - nval / 2;
 
-	isoX = x0 - y0 + p->height;
+	isoX = x0 - r * y0 + p->height;
 	isoY = (x0 + y0) / 2 + p->width;
-	isoX1 = x1 - y1 + p->height;
+	isoX1 = x1 - r * y1 + p->height;
 	isoY1 = (x1 + y1) / 2 + p->width;
 	tmp = isoX;
 	if (tmp < isoX1) 
@@ -68,6 +72,9 @@ int	vdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 	int isoY;
 	int isoX1;
 	int isoY1;
+	int	r;
+	
+	r = 1;
 
 	x1 = x0 * p->key;
 	y1 = (y0 + 1) * p->key;
@@ -79,9 +86,9 @@ int	vdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 	x1 = x1 - 1 * nval;
 	y1 = y1 - nval / 2;
 
-	isoX = x0 - y0 + p->height;
+	isoX = x0 - r * y0 + p->height;
 	isoY = (x0 + y0) / 2 + p->width;;
-	isoX1 = x1 - y1 + p->height;
+	isoX1 = x1 - r * y1 + p->height;
 	isoY1 = (x1 + y1) / 2 + p->width;
 	tmp = isoX;
 	if (isoX != isoX1) 

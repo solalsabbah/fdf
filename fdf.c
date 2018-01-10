@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 14:38:35 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 17:24:04 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		map_dimension(char *file, t_param *p)
 
 	i = 0;
 	p->col = 0;
+	nb = 0;
 	while (file[i])
 	{
 		while (file[i] == ' ')
@@ -46,7 +47,6 @@ int		map_dimension(char *file, t_param *p)
 		i++;
 	}
 	p->row = nb;
-	printf("[%d] %d\n", p->col, p->row);
 	return (0);
 }
 
@@ -72,7 +72,6 @@ char	**file2tab(char *str, t_param *p)
 int read_file(char *str, t_param p)
 {
 	int		x;
-	//int	y;
 	int		a;
 	int		b;
 	int		h;
@@ -84,36 +83,35 @@ int read_file(char *str, t_param p)
 
 	if (!(tab = file2tab(str, &p)))
 		return (-1);
-	printf("{%d}\n", p.col);
 	//	p.image = mlx_new_image(p.mlx, 55 * x, 11 * y); // image 
 	//	image_string = mlx_get_data_addr(p.image, );
 	x = 0;
 	a = 0;
-	int i;
-	int j;
-	int e;
-	int f;
-	i = 0;
-	j = 0;
 	while (tab[x])
 	{
 		h = ft_atoi(tab[x]);
-		if (tab[x + 1]) 
-			nval = ft_atoi(tab[x + 1]);
-		if (h == 0 || h != (nval))
-			hdraw(&p, a % p.row, b, h, nval, 0x269D8F);	
-		else if (h == ft_atoi(tab[x + 1])) 
-			hdraw(&p, a % p.row, b, h, nval, 0xFF0000);
-		if (x < 190)
-			yval = ft_atoi(tab[x + 19]);
-		if (h == 0 || h != ft_atoi(tab[x + 19]))
-			vdraw(&p, a % p.row, b, h, yval, 0x269D8F);
-		else if (h == ft_atoi(tab[x + 19])) 
-			vdraw(&p, a % p.row, b, h, yval, 0xFF0000);
+		if ((x + 1) % p.row != 0 || x == 0)
+		{	
+			if (tab[x + 1])
+				nval = ft_atoi(tab[x + 1]); 
+			if (h == 0 || h != (nval))
+				hdraw(&p, a % p.row, b, h, nval, 0x269D8F);	
+			else if (h == ft_atoi(tab[x + 1])) 
+				hdraw(&p, a % p.row, b, h, nval, 0xFF0000);
+		}
+		if (x + p.row < p.row * p.col)
+		{	
+			yval = ft_atoi(tab[x + p.row]);
+			if (h == 0 || h != ft_atoi(tab[x + p.row]))
+				vdraw(&p, a % p.row, b, h, yval, 0x269D8F);
+			else if (h == ft_atoi(tab[x + p.row])) 
+				vdraw(&p, a % p.row, b, h, yval, 0xFF0000);
+		}
 		a++;
 		x++;
 		b = a / p.row;
 	}
+	printf("[%d]", x);
 	return (0);
 }
 

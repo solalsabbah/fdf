@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 18:22:43 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:45:12 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int read_file(char *str, t_param p)
 			if (h == 0 || h != (nval))
 				hdraw(&p, a % p.row, b, h, nval, 0x269D8F);	
 			else if (h == ft_atoi(tab[x + 1])) 
-				hdraw(&p, a % p.row, b, h, nval, 0xFF0000);
+				hdraw(&p, a % p.row, b, h, nval, 0x0008FF);
 		}
 		if (x + p.row < p.row * p.col)
 		{	
@@ -105,7 +105,7 @@ int read_file(char *str, t_param p)
 			if (h == 0 || h != ft_atoi(tab[x + p.row]))
 				vdraw(&p, a % p.row, b, h, yval, 0x269D8F);
 			else if (h == ft_atoi(tab[x + p.row])) 
-				vdraw(&p, a % p.row, b, h, yval, 0xFF0000);
+				vdraw(&p, a % p.row, b, h, yval, 0x0008FF);
 		}
 		a++;
 		x++;
@@ -114,18 +114,23 @@ int read_file(char *str, t_param p)
 	printf("[%d]", x);
 	return (0);
 }
+int	init_p(t_param *p)
+{
+	p->key = 10;
+	p->height = 500;
+	p->width = 500;
+	p->mouse = 1;
+	p->justify = 0;
+	return (0);
 
+}
 int	main(int ac, char **av)
 {
 	t_param	p;
-
+	
+	init_p(&p);
 	ac = 0;
-	p.key = 10;
-	p.height = 400;
-	p.width = 200;
-	p.mouse = 1;
-	p.justify = 0;
-	p.mlx = mlx_init();
+		p.mlx = mlx_init();
 	p.win = mlx_new_window(p.mlx, 1000, 1000, "fdf");
 	p.file = av[1];
 	if (read_file(av[1], p) == -1)

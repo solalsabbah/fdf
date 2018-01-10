@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/09 18:35:12 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 14:07:12 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct	s_param
 	int		mouse;
 	int		rot;
 	char	*file;
+	int		row;
+	int		col;
 
 }				t_param;
 

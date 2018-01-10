@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/09 18:38:12 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 14:38:35 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,31 @@ int	ft_mouse_hook(int button, int x, int y, t_param *p)
 	return (0);
 }
 
-char	**file2tab(char *str)
+int		map_dimension(char *file, t_param *p)
+{
+	int i;
+	int nb;
+
+	i = 0;
+	p->col = 0;
+	while (file[i])
+	{
+		while (file[i] == ' ')
+			i++;
+		if (file[i] >= '0' && file[i] <= '9' && p->col == 0)
+			nb++;
+		while (file[i] >= '0' && file[i] <= '9')
+			i++;
+		if (file[i] == '\n')
+			p->col += 1;
+		i++;
+	}
+	p->row = nb;
+	printf("[%d] %d\n", p->col, p->row);
+	return (0);
+}
+
+char	**file2tab(char *str, t_param *p)
 {
 	int		fd;
 	char	*line;
@@ -41,23 +65,26 @@ char	**file2tab(char *str)
 		file = ft_strjoin(file, line);
 		file = ft_strjoin(file, "\n");
 	}
+	map_dimension(file, p);
 	return (ft_split(file));
 }
 
 int read_file(char *str, t_param p)
 {
 	int		x;
-	//int		y;
+	//int	y;
 	int		a;
 	int		b;
 	int		h;
 	//int	hval;
 	int		nval;
+	int		yval;
 	char	**tab;
 	//	char	*image_string;
 
-	if (!(tab = file2tab(str)))
+	if (!(tab = file2tab(str, &p)))
 		return (-1);
+	printf("{%d}\n", p.col);
 	//	p.image = mlx_new_image(p.mlx, 55 * x, 11 * y); // image 
 	//	image_string = mlx_get_data_addr(p.image, );
 	x = 0;
@@ -68,35 +95,24 @@ int read_file(char *str, t_param p)
 	int f;
 	i = 0;
 	j = 0;
-	/*	while (tab[i])
-		{
-		j = 0;
-		while (j <= 4)
-		{
-		e = j * 50;
-		f = (i % 6) * 50;
-		draw(&p, e, f, 0x269DFF);
-		j++;
-		}
-		i++;
-		}
-		*/
 	while (tab[x])
 	{
 		h = ft_atoi(tab[x]);
 		if (tab[x + 1]) 
 			nval = ft_atoi(tab[x + 1]);
 		if (h == 0 || h != (nval))
-			hdraw(&p, a % 19, b, h, nval, 0x269D8F);	
+			hdraw(&p, a % p.row, b, h, nval, 0x269D8F);	
 		else if (h == ft_atoi(tab[x + 1])) 
-			hdraw(&p, a % 19, b, h, nval, 0xFF0000);
+			hdraw(&p, a % p.row, b, h, nval, 0xFF0000);
+		if (x < 190)
+			yval = ft_atoi(tab[x + 19]);
 		if (h == 0 || h != ft_atoi(tab[x + 19]))
-			vdraw(&p, a % 19, b, h, nval, 0x269D8F);
+			vdraw(&p, a % p.row, b, h, yval, 0x269D8F);
 		else if (h == ft_atoi(tab[x + 19])) 
-			vdraw(&p, a % 19, b, h, nval, 0xFF0000);
+			vdraw(&p, a % p.row, b, h, yval, 0xFF0000);
 		a++;
 		x++;
-		b = a / 19;
+		b = a / p.row;
 	}
 	return (0);
 }

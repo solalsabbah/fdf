@@ -6,53 +6,86 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 16:38:57 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/09 18:51:16 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/10 14:39:48 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	hdraw(t_param *p, int x, int y, int h, int nval, int col)
+
+int	hdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 {
 	int a;
 	int b;
 	int isoX;
 	int isoY;
 
-	x = x * p->key + 600;
-	y = y * p->key + 200;
-	a = x - 1 * h;
-	b = y - h / 2;
-	printf("{%d}\n", a);
-	printf("[%d]\n", x + p->key);
-	while (a < x + p->key)
+	int x1;
+	int y1;
+	int a1;
+	int b1;
+	int isoX1;
+	int isoY1;
+	int tmp;
+
+	x1 = (x0 + 1) * p->key + 400;
+	
+	x0 = x0 * p->key + 400;
+	y0 = y0 * p->key + 100;
+	a = x0 - 1 * h;
+	b = y0 - h / 2;
+
+	y1 = y0;
+	a1 = x1 - 1 * nval;
+	b1 = y1 - nval / 2;
+
+	isoX = a - b;
+	isoY = (a + b) / 2;
+	isoX1 = a1 - b1;
+	isoY1 = (a1 + b1) / 2;
+	tmp = isoX;
+	while (tmp != isoX1)
 	{
-	//	printf("%d\n", a);
-		isoX = a - b;
-		isoY = (a + b) / 2;
-		mlx_pixel_put(p->mlx, p->win, isoX, isoY, col);
-		a++;
+		mlx_pixel_put(p->mlx, p->win, tmp * 2,isoY+((isoY1-isoY)*(tmp - isoX))/(isoX1-isoX), col);
+		tmp++;
 	}
 	return (0);
 }
 
-int	vdraw(t_param *p, int x, int y, int h, int nval, int col)
+int	vdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 {
 	int a;
 	int b;
 	int isoX;
 	int isoY;
 
-	x = x * p->key + 600;
-	y = y * p->key + 200;
-	a = x - 1 * h;
-	b = y - h / 2;
-	while (b < y + p->key)
+	int x1;
+	int y1;
+	int a1;
+	int b1;
+	int isoX1;
+	int isoY1;
+	int tmp;
+
+	x1 = x0 * p->key + 400;
+	y1 = (y0 + 1) * p->key + 100;
+	x0 = x0 * p->key + 400;
+	y0 = y0 * p->key + 100;
+	a = x0 - 1 * h;
+	b = y0 - h / 2;
+
+	a1 = x1 - 1 * nval;
+	b1 = y1 - nval / 2;
+
+	isoX = a - b;
+	isoY = (a + b) / 2;
+	isoX1 = a1 - b1;
+	isoY1 = (a1 + b1) / 2;
+	tmp = isoX;
+	while (tmp != isoX1)
 	{
-		isoX = a - b;
-		isoY = (a + b) / 2;
-		mlx_pixel_put(p->mlx, p->win, isoX, isoY, col);
-		b++;
+		mlx_pixel_put(p->mlx, p->win, tmp * 2,isoY+((isoY1-isoY)*(tmp - isoX))/(isoX1-isoX), col);
+		tmp--;
 	}
 	return (0);
 }

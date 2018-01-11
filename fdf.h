@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/11 12:08:49 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/11 17:36:02 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,37 @@
 # include <stdlib.h>
 # include <math.h>
 
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
+
 typedef struct	s_param
 {
 	void	*mlx;
 	void	*win;
 	void	*image_ptr;
+	char	**tab;
+	char	*file;
 	int		*image;
 	int		key;
 	int		mouse;
 	int		rot;
-	char	*file;
 	int		row;
 	int		col;
 	int		width;
 	int		height;
 	int		justify;
+	int		x0;
+	int		y0;
+	int		x1;
+	int		y1;
 }				t_param;
 
-int		read_file(char *str, t_param p);
+int		solve(char **tab, t_param *p);
+int		map_dimension(char *file, t_param *p);
 int		ft_key(int keycode, t_param *p);
+int		ft_mouse_hook(int button, int x, int y, t_param *p);
+int		vfill(t_param *p, int x, int y, int h, int nval, int col);
+int		hfill(t_param *p, int x, int y, int h, int nval, int col);
 int		vdraw(t_param *p, int x, int y, int h, int nval, int col);
 int		hdraw(t_param *p, int x, int y, int h, int nval, int col);
 

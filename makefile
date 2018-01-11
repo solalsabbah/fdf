@@ -6,7 +6,7 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
-#    Updated: 2018/01/09 16:37:48 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/01/11 17:33:54 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ NAME = fdf
 
 SRC = 	fdf.c\
 		get_next_line.c\
-		ft_key.c\
+		ft_events.c\
 		draw.c\
+		map_dimension.c\
+		fill_image.c\
 
 OBJ = $(SRC:.c=.o)
 

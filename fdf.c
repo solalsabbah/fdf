@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/11 17:41:16 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/11 17:54:26 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "get_next_line.h"
 #include "./libft/libft.h"
 
 int	init_p(t_param *p)
@@ -105,10 +104,14 @@ int	main(int ac, char **av)
 
 	init_p(&p);
 	p.file = av[1];
-	ac = 0;
+	if (ac-- != 2)
+	{
+		printf("One and only one file is required, you attempt [%d] file(s)\n", ac);
+		return (0);
+	}
 	if ((tab = file2tab(av[1], &p)) == NULL)
 	{
-		printf("A file is required\n");
+		printf("The file \"%s\" is not valid\n", av[1]);
 		return (0);
 	}
 	p.tab = tab;

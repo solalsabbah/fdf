@@ -6,15 +6,14 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 17:26:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/08 13:01:21 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/11 17:54:10 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include "libft/libft.h"
-#include "get_next_line.h"
+#include "libft.h"
 
 int		ft_remaintoline(char **rem, char **line)
 {

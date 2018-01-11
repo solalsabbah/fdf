@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 19:30:30 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/11 12:34:48 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,17 @@ int read_file(char *str, t_param p)
 	int		nval;
 	int		yval;
 	char	**tab;
-	//	char	*image_string;
+	int		bpp;
+	int		size_l;
+	int		endian;
 
-	if (!(tab = file2tab(str, &p)))
-		return (-1);
-	//	p.image = mlx_new_image(p.mlx, 55 * x, 11 * y); // image 
-	//	image_string = mlx_get_data_addr(p.image, );
 	x = 0;
 	a = 0;
 	b = 0;
+	if (!(tab = file2tab(str, &p)))
+		return (-1);
+	p.image_ptr = mlx_new_image(p.mlx, 1000, 1000); // image 
+	p.image = (int *)mlx_get_data_addr(p.image_ptr, &bpp, &size_l, &endian);
 	while (tab[x])
 	{
 		h = ft_atoi(tab[x]);
@@ -112,8 +114,10 @@ int read_file(char *str, t_param p)
 		x++;
 		b = a / p.row;
 	}
+//	mlx_put_image_to_window(p.mlx, p.win, p.image_ptr, 0, 0);
 	return (0);
 }
+
 int	init_p(t_param *p)
 {
 	p->key = 10;
@@ -124,6 +128,7 @@ int	init_p(t_param *p)
 	return (0);
 
 }
+
 int	main(int ac, char **av)
 {
 	t_param	p;

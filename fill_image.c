@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   fill_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 16:38:57 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/11 12:35:16 by ssabbah          ###   ########.fr       */
+/*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
+/*   Updated: 2018/01/11 12:26:46 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ int	hdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 	isoX1 = x1 - r * y1 + p->height;
 	isoY1 = (x1 + y1) / 2 + p->width;
 	tmp = isoX;
-	if (tmp < isoX1) 
+	if (tmp < isoX1)
 	{
 		while (tmp != isoX1)
 		{
-			mlx_pixel_put(p->mlx, p->win, tmp + p->justify,isoY+((isoY1-isoY)*(tmp - isoX))/(isoX1-isoX), col);
+			p->image[(tmp + p->justify) * 1000 + (isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX))] = col;
 			tmp++;
 		}
 	}
-	else 
+	else
 	{
 		while (tmp != isoX1)
 		{
-			mlx_pixel_put(p->mlx, p->win, tmp + p->justify,isoY+((isoY1-isoY)*(tmp - isoX))/(isoX1-isoX), col);
+			p->image[(tmp + p->justify) * 1000 + (isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX))] = col;
 			tmp--;
 		}
 	}
@@ -73,7 +73,7 @@ int	vdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 	int isoX1;
 	int isoY1;
 	int	r;
-	
+
 	r = 1;
 
 	x1 = x0 * p->key;
@@ -91,11 +91,11 @@ int	vdraw(t_param *p, int x0, int y0, int h, int nval, int col)
 	isoX1 = x1 - r * y1 + p->height;
 	isoY1 = (x1 + y1) / 2 + p->width;
 	tmp = isoX;
-	if (isoX != isoX1) 
+	if (isoX != isoX1)
 	{
 		while (tmp != isoX1)
 		{
-			mlx_pixel_put(p->mlx, p->win, tmp + p->justify,isoY+((isoY1-isoY)*(tmp - isoX))/(isoX1-isoX), col);
+			p->image[(tmp + p->justify) * 1000 + (isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX))] = col;
 			tmp--;
 		}
 	}

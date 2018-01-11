@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/10 18:22:58 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/11 12:08:49 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ typedef struct	s_param
 {
 	void	*mlx;
 	void	*win;
-	void	*image;
+	void	*image_ptr;
+	int		*image;
 	int		key;
 	int		mouse;
 	int		rot;

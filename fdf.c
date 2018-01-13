@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/11 17:54:26 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/13 12:19:55 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 int	init_p(t_param *p)
 {
 	p->key = 10;
-	p->height = 500;
+	p->up = 500;
 	p->width = 500;
 	p->mouse = 1;
 	p->justify = 0;
+	p->height = 1;
 	return (0);
 
 }
@@ -73,20 +74,16 @@ int	solve(char **tab, t_param *p)
 			if (tab[x + 1])
 				nval = ft_atoi(tab[x + 1]); 
 			if (h == 0 || h != (nval))
-				//	hdraw(&p, a % p->row, b, h, nval, 0x269D8F);	
 				hfill(p, a % p->row, b, h, nval, 0x269D8F);	
 			else if (h == ft_atoi(tab[x + 1])) 
-				//	hdraw(&p, a % p->row, b, h, nval, 0x0008FF);
 				hfill(p, a % p->row, b, h, nval, 0x0008FF);	
 		}
 		if (x + p->row < p->row * p->col)
 		{	
 			yval = ft_atoi(tab[x + p->row]);
 			if (h == 0 || h != ft_atoi(tab[x + p->row]))
-				//	vdraw(&p, a % p->row, b, h, yval, 0x269D8F);
 				vfill(p, a % p->row, b, h, yval, 0x269D8F);
 			else if (h == ft_atoi(tab[x + p->row])) 
-				//	vdraw(&p, a % p->row, b, h, yval, 0x0008FF);
 				vfill(p, a % p->row, b, h,  yval, 0x0008FF);
 		}
 		a++;

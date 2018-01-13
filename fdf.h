@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/11 17:36:02 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/13 11:05:35 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_param
 	int		row;
 	int		col;
 	int		width;
+	int		up;
 	int		height;
 	int		justify;
 	int		x0;

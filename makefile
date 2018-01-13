@@ -6,7 +6,7 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
-#    Updated: 2018/01/11 17:53:40 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/01/13 10:54:28 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME = fdf
 
 SRC = 	fdf.c\
 		ft_events.c\
-		draw.c\
 		map_dimension.c\
 		fill_image.c\
 

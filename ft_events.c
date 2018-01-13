@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:39:37 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/11 17:39:46 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/13 11:59:26 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ int	ft_mouse_hook(int button, int x, int y, t_param *p)
 
 int	ft_key(int keycode, t_param *p)
 {
-
 	printf("key event %d\n", keycode);
-	printf("p key %d\n", p->key);
+//	printf("p->height %d\n", p->height);
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 126) // up
@@ -60,6 +59,18 @@ int	ft_key(int keycode, t_param *p)
 	if (keycode == 13) // s
 	{
 		p->width -= 3;
+		mlx_clear_window(p->mlx, p->win);
+		solve(p->tab, p);
+	}
+	if (keycode == 69) // +
+	{
+		p->height += 1;
+		mlx_clear_window(p->mlx, p->win);
+		solve(p->tab, p);
+	}
+	if (keycode == 78) // -
+	{
+		p->height -= 1;
 		mlx_clear_window(p->mlx, p->win);
 		solve(p->tab, p);
 	}

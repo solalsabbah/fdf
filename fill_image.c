@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/13 13:35:08 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/13 16:12:57 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,14 @@ int	drawline(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 	int tmp;
 
 	tmp =  isoX;
-	if (tmp  == isoX1)
+	while (tmp != isoX1 && tmp < WIN_WIDTH)
 	{
-		while (isoY > isoY1)
-		{
-			p->image[tmp + isoY * WIN_WIDTH] = col;
-			isoY--;
-		}
-	}
-	if (tmp < isoX1)
-	{
-		while (tmp != isoX1 && tmp < WIN_WIDTH) // pas de debordement
-		{
-			if ((tmp + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH)) < WIN_WIDTH * WIN_HEIGHT)
-				p->image[tmp + (isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH] = col;
+		if ((tmp + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH)) < WIN_WIDTH * WIN_HEIGHT)
+			p->image[(tmp  + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX))) * WIN_WIDTH)] = col;
+		if (tmp < isoX1)
 			tmp++;
-		}
-	}
-	else
-	{
-		while (tmp != isoX1 && tmp <  WIN_WIDTH)
-		{
-			if (tmp + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH) < WIN_WIDTH * WIN_HEIGHT)
-				p->image[(tmp + (isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH)] = col;
+		else 
 			tmp--;
-		}
 	}
 	return (0);
 }
@@ -72,15 +55,20 @@ int	hfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	int isoY;
 	int isoX1;
 	int isoY1;
-
+	
+	col = 0;
 	hcoord(p, x0, y0, h, nval);
-
 	isoX = p->x0 -  p->y0 + p->up;
 	isoY = (p->x0 + p->y0) / 2 + p->width;
 	isoX1 = p->x1 -  p->y1 + p->up;
 	isoY1 = (p->x1 + p->y1) / 2 + p->width;
-	
-	drawline(isoX, isoY, isoX1, isoY1, p, col);
+
+	if (h != 0 && nval != 0)
+		drawline(isoX, isoY, isoX1, isoY1, p, 15326159);
+	else if (h != nval)
+		drawline(isoX, isoY, isoX1, isoY1, p, 8666885);
+	else	
+		drawline(isoX, isoY, isoX1, isoY1, p, 551168);
 	return (0);
 }
 
@@ -112,13 +100,17 @@ int	vfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	int isoX1;
 	int isoY1;
 
+	col = 0;
 	vcoord(p, x0, y0, h, nval);	
-
 	isoX = p->x0 - p->y0 + p->up;
 	isoY = (p->x0 + p->y0) / 2 + p->width;
 	isoX1 = p->x1 - p->y1 + p->up;
 	isoY1 = (p->x1 + p->y1) / 2 + p->width;
-	
-	drawline(isoX, isoY, isoX1, isoY1, p, col);
+	if (h != 0 && nval != 0)
+		drawline(isoX, isoY, isoX1, isoY1, p, 15326159);
+	else if (h != nval)
+		drawline(isoX, isoY, isoX1, isoY1, p, 8666885);
+	else	
+		drawline(isoX, isoY, isoX1, isoY1, p, 551168);
 	return (0);
 }

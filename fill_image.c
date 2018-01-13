@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/13 13:04:43 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/13 13:35:08 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	drawline(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 	}
 	if (tmp < isoX1)
 	{
-		while (tmp != isoX1)
+		while (tmp != isoX1 && tmp < WIN_WIDTH) // pas de debordement
 		{
 			if ((tmp + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH)) < WIN_WIDTH * WIN_HEIGHT)
 				p->image[tmp + (isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH] = col;
@@ -36,7 +36,7 @@ int	drawline(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 	}
 	else
 	{
-		while (tmp != isoX1)
+		while (tmp != isoX1 && tmp <  WIN_WIDTH)
 		{
 			if (tmp + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH) < WIN_WIDTH * WIN_HEIGHT)
 				p->image[(tmp + (isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH)] = col;

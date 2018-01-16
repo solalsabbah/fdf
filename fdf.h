@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/16 14:42:22 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/16 18:20:13 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_param
 	int			key;
 	int			mouse;
 	int			rot;
+	int			alpha;
 	int			row;
 	int			col;
 	int			width;

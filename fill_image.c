@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/13 16:12:57 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/16 16:31:35 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ int	hfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	int isoY;
 	int isoX1;
 	int isoY1;
-	
+
 	col = 0;
 	hcoord(p, x0, y0, h, nval);
 	isoX = p->x0 -  p->y0 + p->up;
 	isoY = (p->x0 + p->y0) / 2 + p->width;
 	isoX1 = p->x1 -  p->y1 + p->up;
 	isoY1 = (p->x1 + p->y1) / 2 + p->width;
-
 	if (h != 0 && nval != 0)
 		drawline(isoX, isoY, isoX1, isoY1, p, 15326159);
 	else if (h != nval)

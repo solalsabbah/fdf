@@ -6,13 +6,13 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/13 16:40:53 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/16 16:31:34 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 #include "./minilibx_macos/mlx.h"
-#include "./ft_printf/includes/libft.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -42,6 +42,7 @@ char	**file2tab(char *str, t_param *p)
 	{
 		file = ft_strjoin(file, line);
 		file = ft_strjoin(file, "\n");
+		free(line);
 	}
 	map_dimension(file, p);
 	return (ft_split(file));
@@ -94,19 +95,18 @@ int		main(int ac, char **av)
 	p.file = av[1];
 	if (ac-- != 2)
 	{
-		ft_printf("One and only one file is required\n");
+		ft_putstr("One and only one file is required\n");
 		return (0);
 	}
-	if ((p.tab = file2tab(av[1], &p)) == NULL)
+	if (ft_strncmp(".fdf", &av[1][ft_strlen(av[1]) - 4], 5) != 0 || (p.tab = file2tab(av[1], &p)) == NULL)
 	{
-		ft_printf("The file \"%s\" is not valid\n", av[1]);
+		ft_putstr("The file is not valid\n");
 		return (0);
 	}
 	p.mlx = mlx_init();
 	p.win = mlx_new_window(p.mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
 	create_image(p.tab, &p);
 	mlx_key_hook(p.win, ft_key, &p);
-	mlx_mouse_hook(p.win, ft_mouse_hook, &p);
 	mlx_loop(p.mlx);
 	return (0);
 }

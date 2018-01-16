@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 15:52:58 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/13 16:24:40 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/16 13:57:14 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-int		get_next_line(const int fd, char **line);
+int					get_next_line(const int fd, char **line);
+long long			abs_val(long long nb);
 char				**ft_split(char *str);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 char				*ft_strdup(const char *s1);

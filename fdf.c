@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/26 17:01:38 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/26 17:36:48 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int		solve(char **tab, t_param *p)
 		if ((x + 1) % p->row != 0 || (x == 0 && tab[x + 1]))
 		{
 			nval = ft_atoi(tab[x + 1]);
-			hfill(p, x % p->row, b, h, nval, 0x0008FF);
+			hfill(p, x % p->row, b, h, nval);
 		}
 		if (x + p->row < p->row * p->col)
 		{
 			yval = ft_atoi(tab[x + p->row]);
-			vfill(p, x % p->row, b, h, yval, 0x269D8F);
+			vfill(p, x % p->row, b, h, yval);
 		}
 		x++;
 		b = x / p->row;
@@ -80,7 +80,7 @@ int		solve(char **tab, t_param *p)
 
 int		create_image(char **tab, t_param *p)
 {
-	p->image_ptr = mlx_new_image(p->mlx, 1000, 1000);
+	p->image_ptr = mlx_new_image(p->mlx, WIN_WIDTH, WIN_HEIGHT);
 	p->image = (int *)mlx_get_data_addr(p->image_ptr,
 			&p->bpp, &p->size_l, &p->endian);
 	solve(tab, p);

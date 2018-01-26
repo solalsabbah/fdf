@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/26 16:46:35 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/26 17:37:19 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 # include <math.h>
 #include "./libft/libft.h"
 
-# define WIN_WIDTH 1000
+# define WIN_WIDTH 1500
 # define WIN_HEIGHT 1000
+
+# define BLUE 0x72CAFF
+# define GREEN 0x47D600
+# define BROWN 0x752E00
 
 typedef struct	s_param
 {
@@ -56,8 +60,8 @@ int				create_image(char **tab, t_param *p);
 int				map_dimension(char *file, t_param *p);
 int				ft_key(int keycode, t_param *p);
 int				ft_mouse_hook(int button, int x, int y, t_param *p);
-int				vfill(t_param *p, int x, int y, int h, int nval, int col);
-int				hfill(t_param *p, int x, int y, int h, int nval, int col);
+int				vfill(t_param *p, int x, int y, int h, int nval);
+int				hfill(t_param *p, int x, int y, int h, int nval);
 int				vdraw(t_param *p, int x, int y, int h, int nval, int col);
 int				hdraw(t_param *p, int x, int y, int h, int nval, int col);
 

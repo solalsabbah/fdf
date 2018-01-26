@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/26 17:16:57 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/26 17:39:15 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,13 @@ int	hcoord(t_param *p, int x0, int y0, int h, int nval)
 	return (0);
 }
 
-int	hfill(t_param *p, int x0, int y0, int h, int nval, int col)
+int	hfill(t_param *p, int x0, int y0, int h, int nval)
 {
 	int isoX;
 	int isoY;
 	int isoX1;
 	int isoY1;
 
-	col = 0;
 	hcoord(p, x0, y0, h, nval);
 	p->x0 *= cos(p->alpha);
 	p->y0 *= sin(p->alpha);
@@ -111,11 +110,11 @@ int	hfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	isoX1 = p->x1 - p->y1 + p->up;
 	isoY1 = (p->x1 + p->y1) + p->width;
 	if (h != 0 && nval != 0)
-		drawline(isoX, isoY, isoX1, isoY1, p, 15326159);
+		drawline(isoX, isoY, isoX1, isoY1, p, BROWN);
 	else if (h != nval)
-		drawline(isoX, isoY, isoX1, isoY1, p, 8666885);
+		drawline(isoX, isoY, isoX1, isoY1, p, GREEN);
 	else	
-		drawline(isoX, isoY, isoX1, isoY1, p, 551168);
+		drawline(isoX, isoY, isoX1, isoY1, p, BLUE);
 	return (0);
 }
 
@@ -139,7 +138,7 @@ int	vcoord(t_param *p, int x0, int y0, int h, int nval)
 	return (0);
 }
 
-int	vfill(t_param *p, int x0, int y0, int h, int nval, int col)
+int	vfill(t_param *p, int x0, int y0, int h, int nval)
 {
 
 	int isoX;
@@ -147,7 +146,6 @@ int	vfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	int isoX1;
 	int isoY1;
 
-	col = 0;
 	vcoord(p, x0, y0, h, nval);	
 	p->x0 *= cos(p->alpha);
 	p->y0 *= sin(p->alpha);
@@ -158,10 +156,10 @@ int	vfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	isoX1 = p->x1 - p->y1 + p->up;
 	isoY1 = (p->x1 + p->y1)  + p->width;
 	if (h != 0 && nval != 0)
-		drawline(isoX, isoY, isoX1, isoY1, p, 15326159);
+		drawline(isoX, isoY, isoX1, isoY1, p, BROWN);
 	else if (h != nval)
-		drawline(isoX, isoY, isoX1, isoY1, p, 8666885);
+		drawline(isoX, isoY, isoX1, isoY1, p, GREEN);
 	else	
-		drawline(isoX, isoY, isoX1, isoY1, p, 551168);
+		drawline(isoX, isoY, isoX1, isoY1, p, BLUE);
 	return (0);
 }

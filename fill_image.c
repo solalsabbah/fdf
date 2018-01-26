@@ -6,26 +6,70 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/16 19:33:57 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/26 17:16:57 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
+
+void	draw_one(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
+{
+	int sx;
+	int sy;
+	int err;
+	int e2;
+
+	sx = (isoX1 - isoX < 0) ? -1 : 1;
+	sy = (isoY1 - isoY < 0) ? -1 : 1;
+	err = p->dx + p->dy;
+	while (isoX != isoX1)
+	{
+		if ((isoX + isoY * WIN_WIDTH) <= WIN_WIDTH * WIN_HEIGHT && isoX < WIN_WIDTH && isoY < WIN_HEIGHT)
+			p->image[isoX + isoY * WIN_WIDTH] = col;
+		if (isoX == isoX1 && isoY == isoY1)
+			break ;
+		e2 = 2 * err;
+		err += (e2 >= p->dy) ? p->dy : 0;
+		isoX += (e2 >= p->dy) ? sx : 0;
+		err += (e2 <= p->dx) ? p->dx: 0;
+		isoY += (e2 <= p->dx) ? sy : 0;
+	}
+}
+
+void	draw_two(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
+{
+	int sx;
+	int sy;
+	int err;
+	int e2;
+
+	sx = (isoX1 - isoX < 0) ? -1 : 1;
+	sy = (isoY1 - isoY < 0) ? -1 : 1;
+	err = p->dx + p->dy;
+	while (isoY != isoY1)
+	{
+		if ((isoX + isoY * WIN_WIDTH) <= WIN_WIDTH * WIN_HEIGHT && isoX < WIN_WIDTH && isoY < WIN_HEIGHT)
+			p->image[isoX + isoY * WIN_WIDTH] = col;
+		if (isoX == isoX1 && isoY == isoY1)
+			break ;
+		e2 = 2 * err;
+		err +=(e2 >= p->dy) ? p->dy : 0;
+		isoX += (e2 >= p->dy) ? sx : 0;
+		err += (e2 <= p->dx) ? p->dx: 0;
+		isoY += (e2 <= p->dx) ? sy : 0;
+	}
+}
 
 int	drawline(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 {
-	int tmp;
 
-	tmp =  isoX;
-	while (tmp != isoX1 && tmp < WIN_WIDTH)
-	{
-		if ((tmp + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX)) * WIN_WIDTH)) < WIN_WIDTH * WIN_HEIGHT)
-			p->image[(tmp  + ((isoY + ((isoY1-isoY) * (tmp - isoX)) / (isoX1-isoX))) * WIN_WIDTH)] = col;
-		if (tmp < isoX1)
-			tmp++;
-		else 
-			tmp--;
-	}
+	p->dx = abs_val(isoX1 - isoX);
+	p->dy = -abs_val(isoY1 - isoY);
+	if (-p->dy > p->dx) 
+		draw_one(isoX, isoY, isoX1, isoY1, p, col);
+	else
+		draw_two(isoX, isoY, isoX1, isoY1, p, col);
 	return (0);
 }
 
@@ -59,9 +103,9 @@ int	hfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	col = 0;
 	hcoord(p, x0, y0, h, nval);
 	p->x0 *= cos(p->alpha);
-	p->y0 *= 1;
+	p->y0 *= sin(p->alpha);
 	p->x1 *= cos(p->alpha);
-	p->y1 *= 1;
+	p->y1 *= sin(p->alpha);
 	isoX = p->x0 - p->y0 + p->up;
 	isoY = (p->x0 + p->y0) + p->width;
 	isoX1 = p->x1 - p->y1 + p->up;
@@ -106,9 +150,9 @@ int	vfill(t_param *p, int x0, int y0, int h, int nval, int col)
 	col = 0;
 	vcoord(p, x0, y0, h, nval);	
 	p->x0 *= cos(p->alpha);
-	p->y0 *= 1;
+	p->y0 *= sin(p->alpha);
 	p->x1 *= cos(p->alpha);
-	p->y1 *= 1;
+	p->y1 *= sin(p->alpha);
 	isoX = p->x0 - p->y0 + p->up;
 	isoY = (p->x0 + p->y0) + p->width;
 	isoX1 = p->x1 - p->y1 + p->up;

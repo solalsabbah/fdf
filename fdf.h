@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/16 18:20:13 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/26 16:46:35 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	s_param
 	int			key;
 	int			mouse;
 	int			rot;
-	int			alpha;
+	float		alpha;
 	int			row;
 	int			col;
 	int			width;
@@ -47,6 +47,8 @@ typedef struct	s_param
 	int			y0;
 	int			x1;
 	int			y1;
+	int			dx;
+	int			dy;
 }				t_param;
 
 int				solve(char **tab, t_param *p);

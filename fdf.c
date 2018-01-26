@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/16 18:20:31 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/26 17:01:38 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		main(int ac, char **av)
 	p.mlx = mlx_init();
 	p.win = mlx_new_window(p.mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
 	create_image(p.tab, &p);
-	mlx_key_hook(p.win, ft_key, &p);
+	mlx_hook(p.win, 2, 3, ft_key, &p);
 	mlx_loop(p.mlx);
 	return (0);
 }

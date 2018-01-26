@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:39:37 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/16 18:19:57 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/26 17:01:30 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_key(int keycode, t_param *p)
 {
 	printf("%d\n", keycode);
 	if (keycode == 91) // 8
-		p->alpha += 10;
+		p->alpha += 0.1;
 	if (keycode == 87) // 5
-		p->alpha -= 10; 
+		p->alpha -= 0.1; 
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 126)

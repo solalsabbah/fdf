@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 17:27:22 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 18:13:43 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		init_p(t_param *p)
 	p->justify = 1;
 	p->height = 1;
 	p->alpha = 50;
+	p->startz = 0;
+	p->endz = 0;
 	return (0);
 }
 
@@ -53,24 +55,21 @@ int		solve(char **tab, t_param *p)
 {
 	int		x;
 	int		b;
-	int		h;
-	int		nval;
-	int		yval;
 
 	x = 0;
 	b = 0;
 	while (tab[x])
 	{
-		h = ft_atoi(tab[x]);
+		p->startz = ft_atoi(tab[x]);
 		if ((x + 1) % p->row != 0 || (x == 0 && tab[x + 1]))
 		{
-			nval = ft_atoi(tab[x + 1]);
-			hfill(p, x % p->row, b, h, nval);
+			p->endz = ft_atoi(tab[x + 1]);
+			hfill(p, x % p->row, b);
 		}
 		if (x + p->row < p->row * p->col)
 		{
-			yval = ft_atoi(tab[x + p->row]);
-			vfill(p, x % p->row, b, h, yval);
+			p->endz = ft_atoi(tab[x + p->row]);
+			vfill(p, x % p->row, b);
 		}
 		x++;
 		b = x / p->row;
@@ -80,7 +79,7 @@ int		solve(char **tab, t_param *p)
 
 int		create_image(char **tab, t_param *p)
 {
-	p->image_ptr = mlx_new_image(p->mlx, WIN_WIDTH, WIN_HEIGHT);
+	p->image_ptr = mlx_new_image(p->mlx, WIDTH, HEIGHT);
 	p->image = (int *)mlx_get_data_addr(p->image_ptr,
 			&p->bpp, &p->size_l, &p->endian);
 	solve(tab, p);
@@ -106,7 +105,7 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	p.mlx = mlx_init();
-	p.win = mlx_new_window(p.mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
+	p.win = mlx_new_window(p.mlx, WIDTH, HEIGHT, "fdf");
 	create_image(p.tab, &p);
 	mlx_hook(p.win, 2, 3, ft_key, &p);
 	mlx_loop(p.mlx);

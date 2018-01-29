@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 14:51:53 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:27:22 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int		init_p(t_param *p)
 {
 	p->key = 10;
+	p->col = 0;
 	p->up = 500;
 	p->width = 500;
 	p->mouse = 1;
@@ -98,7 +99,8 @@ int		main(int ac, char **av)
 		ft_putstr("One and only one file is required\n");
 		return (0);
 	}
-	if (ft_strncmp(".fdf", &av[1][ft_strlen(av[1]) - 4], 5) != 0 || (p.tab = file2tab(av[1], &p)) == NULL)
+	if (ft_strncmp(".fdf", &av[1][ft_strlen(av[1]) - 4], 5) != 0
+			|| (p.tab = file2tab(av[1], &p)) == NULL)
 	{
 		ft_putstr("The file is not valid\n");
 		return (0);

@@ -6,14 +6,49 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 15:03:01 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:31:40 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 #include <stdio.h>
 
-void	draw_one(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
+int		col(t_param *p)
+{
+		if (p->col0 % 3 == 0)
+		{
+			p->col1 = WHITE;
+			p->col2 = WHITE; 
+			p->col3 = WHITE;
+		}
+		if (p->col0 % 3 == 1)
+		{
+			p->col1 = WHITE;
+			p->col2 = BLUE;
+			p->col3 = BROWN;
+		}
+		if (p->col0 % 3 == 2)
+		{
+			p->col1 = PINK;
+			p->col2 = YELLOW;
+			p->col3 = PURPLE;
+		}
+		return (0);
+}
+
+int		put_color(int isoX, int isoY, t_param *p)
+{
+		col(p);
+		if (p->startz == 0 && p->endz == 0)
+			p->image[isoX + isoY * WIN_WIDTH] = p->col1;
+		else if (p->startz != 0 && p->endz != 0) 
+			p->image[isoX + isoY * WIN_WIDTH] = p->col2;
+		else
+			p->image[isoX + isoY * WIN_WIDTH] = p->col3;
+		return (0);
+}
+
+void	draw_one(int isoX, int isoY, int isoX1, int isoY1, t_param *p)
 {
 	int sx;
 	int sy;
@@ -25,8 +60,8 @@ void	draw_one(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 	err = p->dx + p->dy;
 	while (isoX != isoX1)
 	{
-		if ((isoX + isoY * WIN_WIDTH) <= WIN_WIDTH * WIN_HEIGHT && isoX < WIN_WIDTH && isoY < WIN_HEIGHT)
-			p->image[isoX + isoY * WIN_WIDTH] = col;
+		if ((isoX + isoY * WIN_WIDTH) <= WIN_WIDTH * WIN_HEIGHT && isoX < WIN_WIDTH && isoY < WIN_HEIGHT && (isoX + isoY * WIN_WIDTH > 0))
+			put_color(isoX, isoY, p);
 		if (isoX == isoX1 && isoY == isoY1)
 			break ;
 		e2 = 2 * err;
@@ -37,7 +72,7 @@ void	draw_one(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 	}
 }
 
-void	draw_two(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
+void	draw_two(int isoX, int isoY, int isoX1, int isoY1, t_param *p)
 {
 	int sx;
 	int sy;
@@ -49,8 +84,8 @@ void	draw_two(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 	err = p->dx + p->dy;
 	while (isoY != isoY1)
 	{
-		if ((isoX + isoY * WIN_WIDTH) <= WIN_WIDTH * WIN_HEIGHT && isoX < WIN_WIDTH && isoY < WIN_HEIGHT)
-			p->image[isoX + isoY * WIN_WIDTH] = col;
+		if ((isoX + isoY * WIN_WIDTH) <= WIN_WIDTH * WIN_HEIGHT && isoX < WIN_WIDTH && isoY < WIN_HEIGHT && (isoX + isoY * WIN_WIDTH > 0))
+			put_color(isoX, isoY, p);
 		if (isoX == isoX1 && isoY == isoY1)
 			break ;
 		e2 = 2 * err;
@@ -61,15 +96,15 @@ void	draw_two(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
 	}
 }
 
-int	drawline(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)
+int	drawline(int isoX, int isoY, int isoX1, int isoY1, t_param *p)
 {
 
 	p->dx = abs_val(isoX1 - isoX);
 	p->dy = -abs_val(isoY1 - isoY);
 	if (-p->dy > p->dx) 
-		draw_one(isoX, isoY, isoX1, isoY1, p, col);
+		draw_one(isoX, isoY, isoX1, isoY1, p);
 	else
-		draw_two(isoX, isoY, isoX1, isoY1, p, col);
+		draw_two(isoX, isoY, isoX1, isoY1, p);
 	return (0);
 }
 
@@ -101,6 +136,8 @@ int	hfill(t_param *p, int x0, int y0, int h, int nval)
 	int isoY1;
 
 	hcoord(p, x0, y0, h, nval);
+	p->startz = h;
+	p->endz = nval;	
 	p->x0 *= cos(p->alpha);
 	p->y0 *= sin(p->alpha);
 	p->x1 *= cos(p->alpha);
@@ -109,12 +146,7 @@ int	hfill(t_param *p, int x0, int y0, int h, int nval)
 	isoY = (p->x0 + p->y0) + p->width;
 	isoX1 = p->x1 - p->y1 + p->up;
 	isoY1 = (p->x1 + p->y1) + p->width;
-	if (h != 0 && nval != 0)
-		drawline(isoX, isoY, isoX1, isoY1, p, BROWN);
-	else if (h != nval)
-		drawline(isoX, isoY, isoX1, isoY1, p, GREEN);
-	else	
-		drawline(isoX, isoY, isoX1, isoY1, p, BLUE);
+	drawline(isoX, isoY, isoX1, isoY1, p);
 	return (0);
 }
 
@@ -146,7 +178,9 @@ int	vfill(t_param *p, int x0, int y0, int h, int nval)
 	int isoX1;
 	int isoY1;
 
-	vcoord(p, x0, y0, h, nval);	
+	vcoord(p, x0, y0, h, nval);
+	p->startz = h;
+	p->endz = nval;	
 	p->x0 *= cos(p->alpha);
 	p->y0 *= sin(p->alpha);
 	p->x1 *= cos(p->alpha);
@@ -155,11 +189,6 @@ int	vfill(t_param *p, int x0, int y0, int h, int nval)
 	isoY = (p->x0 + p->y0) + p->width;
 	isoX1 = p->x1 - p->y1 + p->up;
 	isoY1 = (p->x1 + p->y1)  + p->width;
-	if (h != 0 && nval != 0)
-		drawline(isoX, isoY, isoX1, isoY1, p, BROWN);
-	else if (h != nval)
-		drawline(isoX, isoY, isoX1, isoY1, p, GREEN);
-	else	
-		drawline(isoX, isoY, isoX1, isoY1, p, BLUE);
+	drawline(isoX, isoY, isoX1, isoY1, p);
 	return (0);
 }

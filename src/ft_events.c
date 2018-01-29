@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:39:37 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 11:53:53 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:01:03 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,23 @@
 
 int	ft_key(int keycode, t_param *p)
 {
-	printf("%d\n", keycode);
-	if (keycode == 91) // 8
-		p->alpha += 0.1;
-	if (keycode == 87) // 5
-		p->alpha -= 0.1; 
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 126)
-		p->key += 1;
-	if (keycode == 125 && p->key > 5)
-		p->key -= 1;
+	p->alpha += keycode == ROT1 ? 0.1 : 0;
+	p->alpha -= keycode == ROT2 ? 0.1 : 0;
+	p->key += keycode == PAGEUP ? 1 : 0;
+	p->key -= keycode == PAGEDOWN && p->key > 5 ? 1 : 0;
 	if (keycode == 0 && p->key > 5)
 		p->justify -= 2;
 	if (keycode == 2 && p->key > 5)
 		p->justify += 2;
-	if (keycode == 1)
-		p->width += 3;
-	if (keycode == 13)
-		p->width -= 3;
-	if (keycode == 69)
-		p->height += 1;
-	if (keycode == 78)
-		p->height -= 1;
-	if (keycode == 51)
-		mlx_clear_window(p->mlx, p->win);
+	p->col0 += keycode == C ? 1 : 0;
+	p->width -= keycode == W ? 3 : 0;
+	p->height += keycode == PLUS ? 1 : 0;
+	p->height -= keycode == MINUS ? 1 : 0;
+	if (keycode == ESC)
+		exit(0);
 	mlx_clear_window(p->mlx, p->win);
 	create_image(p->tab, p);
+	if (keycode == DEL)
+		mlx_clear_window(p->mlx, p->win);
 	return (keycode);
 }

@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:38:22 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 14:59:10 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:29:07 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int		map_dimension(char *file, t_param *p)
 		{
 			while (file[i] == ' ')
 				i++;
-			if (file[i] >= '0' && file[i] <= '9')
+			if ((file[i] >= '0' && file[i] <= '9') || file[i] == '-')
 				p->row++;
-			while (file[i] >= '0' && file[i] <= '9')
+			while ((file[i] >= '0' && file[i] <= '9') || file[i] == '-')
 				i++;
 		}
 		if (nb != p->row && p->col != 0)

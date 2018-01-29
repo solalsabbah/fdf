@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 18:13:43 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 19:09:32 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		init_p(t_param *p)
 char	**file2tab(char *str, t_param *p)
 {
 	int		fd;
+	char	**tab;
 	char	*line;
 	char	*file;
 
@@ -48,7 +49,9 @@ char	**file2tab(char *str, t_param *p)
 	}
 	if (map_dimension(file, p) == -1)
 		return (NULL);
-	return (ft_split(file));
+	tab = ft_split(file);
+	free(file);
+	return (tab);
 }
 
 int		solve(char **tab, t_param *p)

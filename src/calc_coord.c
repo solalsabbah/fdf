@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:41:04 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 18:15:03 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 18:36:47 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ int	hfill(t_param *p, int x0, int y0)
 	isoy = (p->x0 + p->y0) + p->width;
 	isox1 = p->x1 - p->y1 + p->up;
 	isoy1 = (p->x1 + p->y1) + p->width;
-	drawline(isox, isoy, isox1, isoy1, p);
+	p->isox = isox;
+	p->isoy = isoy;
+	drawline(isox1, isoy1, p);
 	return (0);
 }
 
@@ -88,6 +90,8 @@ int	vfill(t_param *p, int x0, int y0)
 	isoy = (p->x0 + p->y0) + p->width;
 	isox1 = p->x1 - p->y1 + p->up;
 	isoy1 = (p->x1 + p->y1) + p->width;
-	drawline(isox, isoy, isox1, isoy1, p);
+	p->isox = isox;
+	p->isoy = isoy;
+	drawline(isox1, isoy1, p);
 	return (0);
 }

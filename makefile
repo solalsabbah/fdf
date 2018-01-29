@@ -6,7 +6,7 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
-#    Updated: 2018/01/29 13:55:16 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/01/29 17:43:51 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC_FILES = fdf.c\
 			ft_events.c\
 			map_dimension.c\
 			fill_image.c\
+			calc_coord.c\
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

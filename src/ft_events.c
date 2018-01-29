@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:39:37 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 17:01:03 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 18:36:02 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_key(int keycode, t_param *p)
 		p->justify += 2;
 	p->col0 += keycode == C ? 1 : 0;
 	p->width -= keycode == W ? 3 : 0;
+	p->width += keycode == S ? 3 : 0;
 	p->height += keycode == PLUS ? 1 : 0;
 	p->height -= keycode == MINUS ? 1 : 0;
 	if (keycode == ESC)

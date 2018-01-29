@@ -6,11 +6,11 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:39:37 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/26 17:01:30 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 11:53:53 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 #include <stdio.h>
 
 int	ft_key(int keycode, t_param *p)

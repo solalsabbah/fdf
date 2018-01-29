@@ -6,13 +6,12 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/26 17:36:48 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 14:51:53 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 #include <stdio.h>
-#include "./minilibx_macos/mlx.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -35,8 +34,7 @@ char	**file2tab(char *str, t_param *p)
 	char	*line;
 	char	*file;
 
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
+	if ((fd = open(str, O_RDONLY)) == -1)
 		return (NULL);
 	file = ft_strnew(1);
 	while (get_next_line(fd, &line))
@@ -45,7 +43,8 @@ char	**file2tab(char *str, t_param *p)
 		file = ft_strjoin(file, "\n");
 		free(line);
 	}
-	map_dimension(file, p);
+	if (map_dimension(file, p) == -1)
+		return (NULL);
 	return (ft_split(file));
 }
 

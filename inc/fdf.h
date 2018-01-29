@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 12:08:46 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/26 17:37:19 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 12:17:22 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
-#include "./libft/libft.h"
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
 
 # define WIN_WIDTH 1500
 # define WIN_HEIGHT 1000

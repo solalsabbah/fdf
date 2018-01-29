@@ -6,11 +6,11 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/26 17:39:15 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/01/29 15:03:01 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 #include <stdio.h>
 
 void	draw_one(int isoX, int isoY, int isoX1, int isoY1, t_param *p, int col)

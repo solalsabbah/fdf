@@ -6,14 +6,14 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 17:26:00 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/16 12:48:34 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/02/01 15:13:32 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
@@ -25,7 +25,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	a = ft_strlen(s1);
 	b = ft_strlen(s2);
-	if ((str = (char *)malloc(sizeof(*str) * (a + b + 1))) == NULL)
+	if ((str = (char *)ft_memalloc(sizeof(*str) * (a + b + 1))) == NULL)
 		return (NULL);
 	while (i < a)
 	{
@@ -37,6 +37,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i] = s2[i - a];
 		i++;
 	}
-	str[i] = '\0';
+	free(s1);
+	free(s2);
 	return (str);
 }

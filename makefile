@@ -6,7 +6,7 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
-#    Updated: 2018/01/29 19:09:31 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/02/01 14:57:21 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_FILES))
 LIB = $(addprefix -I,$(LIB_PATH))
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 LIBFT = -L./libft -lft
 MLX = -L./minilibx -lmlx -framework OpenGL -framework Appkit

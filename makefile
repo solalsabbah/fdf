@@ -6,9 +6,10 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
-#    Updated: 2018/02/01 15:30:50 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/02/01 19:21:46 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** # 
+
 NAME = fdf
 
 SRC_FILES = fdf.c\
@@ -34,9 +35,10 @@ MLX = -L./minilibx -lmlx -framework OpenGL -framework Appkit
 
 all: $(NAME)
 
+
 $(NAME): $(OBJ)
 	@ make -C libft/
-	@ make -C minilibx/
+	@ make -C minilibx
 	@ $(CC) $(FLAGS) $(LIBFT) $(MLX) $^ -o $@
 	@ echo "\033[32mCompilation done : FDF is ready to be used\033[0m"
 

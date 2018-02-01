@@ -6,7 +6,7 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/11 17:25:57 by ssabbah           #+#    #+#              #
-#    Updated: 2018/02/01 15:31:05 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/02/01 19:15:33 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libft.a
 
 SRC =  \
 	   abs_val.c \
+	   ft_strfjoin.c \
 	   count_after.c \
 	   count_before.c \
 	   ft_atoi.c \
@@ -84,9 +85,12 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME):
-	gcc $(FLAGS) -c $(SRC) -include libft.h
+$(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)	
+
+%.o:%.c
+	gcc $(FLAGS) -c $(SRC) -include libft.h
+
 
 clean:
 	/bin/rm -f $(OBJECTS)

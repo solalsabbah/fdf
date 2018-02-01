@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strfjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/19 17:26:00 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/02/01 18:56:52 by ssabbah          ###   ########.fr       */
+/*   Created: 2018/02/01 18:58:38 by ssabbah           #+#    #+#             */
+/*   Updated: 2018/02/01 18:58:40 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strfjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
@@ -37,5 +37,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i] = s2[i - a];
 		i++;
 	}
+	free(s1);
+	free(s2);
 	return (str);
 }

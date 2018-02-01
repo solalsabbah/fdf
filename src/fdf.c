@@ -6,7 +6,7 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/02/01 15:36:52 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/02/01 18:59:09 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ char	**file2tab(char *str, t_param *p)
 	file = ft_strnew(1);
 	while (get_next_line(fd, &line))
 	{
-		file = ft_strjoin(file, line);
-		file = ft_strjoin(file, ft_strdup("\n"));
+		file = ft_strfjoin(file, line);
+		file = ft_strfjoin(file, ft_strdup("\n"));
 	}
 	if (map_dimension(file, p) == -1)
 		return (NULL);

@@ -6,10 +6,9 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
-#    Updated: 2018/02/01 14:57:21 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/02/01 15:30:50 by ssabbah          ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
-
+# **************************************************************************** # 
 NAME = fdf
 
 SRC_FILES = fdf.c\
@@ -57,5 +56,9 @@ fclean: clean
 	@ make -C minilibx fclean
 	@ rm -f $(NAME)
 	@ echo "\033[32mCleaning FDF\033[0m"
+
+norm : 
+	@make -C libft norm
+	norminette $(SRC)
 
 re : fclean all

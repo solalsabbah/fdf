@@ -6,18 +6,18 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:39:37 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 18:36:02 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:48:19 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
-#include <stdio.h>
+#include "fdf.h"
+#include <limits.h>
 
 int	ft_key(int keycode, t_param *p)
 {
 	p->alpha += keycode == ROT1 ? 0.1 : 0;
 	p->alpha -= keycode == ROT2 ? 0.1 : 0;
-	p->key += keycode == PAGEUP ? 1 : 0;
+	p->key += keycode == PAGEUP && p->key < INT_MAX ? 1 : 0;
 	p->key -= keycode == PAGEDOWN && p->key > 5 ? 1 : 0;
 	if (keycode == 0 && p->key > 5)
 		p->justify -= 2;

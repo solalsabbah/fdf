@@ -6,11 +6,11 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:41:04 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 18:36:47 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:51:08 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "fdf.h"
 
 int	hcoord(t_param *p, int x0, int y0)
 {

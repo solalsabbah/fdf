@@ -6,11 +6,11 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:25:13 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/01/29 18:36:49 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:51:08 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "fdf.h"
 #include <stdio.h>
 
 int		col(t_param *p)
@@ -61,7 +61,8 @@ void	draw_one(int isox1, int isoy1, t_param *p)
 	while (p->isox != isox1)
 	{
 		if ((p->isox + p->isoy * WIDTH) <= WIDTH * HEIGHT && p->isox < WIDTH
-				&& p->isoy < HEIGHT && (p->isox + p->isoy * WIDTH > 0))
+				&& p->isoy < HEIGHT && (p->isox + p->isoy * WIDTH >= 0)
+				&& p->isox >= 0 && p->isoy >= 0)
 			put_color(p->isox, p->isoy, p);
 		if (p->isox == isox1 && p->isoy == isoy1)
 			break ;
@@ -85,8 +86,9 @@ void	draw_two(int isox1, int isoy1, t_param *p)
 	err = p->dx + p->dy;
 	while (p->isoy != isoy1)
 	{
-		if ((p->isox + p->isoy * WIDTH) <= WIDTH * HEIGHT && p->isox < WIDTH
-				&& p->isoy < HEIGHT && (p->isox + p->isoy * WIDTH > 0))
+		if ((p->isox + p->isoy * WIDTH) <= WIDTH * HEIGHT && p->isox <= WIDTH
+				&& p->isoy <= HEIGHT && (p->isox + p->isoy * WIDTH >= 0)
+				&& p->isox >= 0 && p->isoy >= 0)
 			put_color(p->isox, p->isoy, p);
 		if (p->isox == isox1 && p->isoy == isoy1)
 			break ;

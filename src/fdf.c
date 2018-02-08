@@ -6,11 +6,11 @@
 /*   By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:06:26 by ssabbah           #+#    #+#             */
-/*   Updated: 2018/02/01 18:59:09 by ssabbah          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:51:08 by ssabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "fdf.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>

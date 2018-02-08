@@ -6,13 +6,13 @@
 #    By: ssabbah <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 11:30:47 by ssabbah           #+#    #+#              #
-#    Updated: 2018/02/01 19:21:46 by ssabbah          ###   ########.fr        #
+#    Updated: 2018/02/08 12:58:13 by ssabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** # 
 
 NAME = fdf
 
-SRC_FILES = fdf.c\
+SRC_FILES = fdf.c \
 			ft_events.c\
 			map_dimension.c\
 			fill_image.c\
@@ -25,7 +25,9 @@ OBJ_PATH = obj/
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_FILES))
-LIB = $(addprefix -I,$(LIB_PATH))
+#LIB = $(addprefix -I,$(LIB_PATH))
+INC_DIR = inc
+INCLUDES = -I $(INC_DIR)
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
@@ -44,7 +46,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@ mkdir -p $(OBJ_PATH)
-	@ $(CC) $(FLAGS) $(LIB) -o $@ -c $<
+	@ $(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
 	@ make -C libft clean
